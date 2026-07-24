@@ -1,0 +1,82 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile data",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "bikeModel": { "type": "string" },
+        "dailyTarget": { "type": "number" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid", "name", "email"]
+    },
+    "ActivityEntry": {
+      "title": "ActivityEntry",
+      "description": "Logged work or study block",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "dateKey": { "type": "string" },
+        "title": { "type": "string" },
+        "type": { "type": "string" },
+        "hours": { "type": "number" },
+        "earning": { "type": "number" },
+        "comment": { "type": "string" },
+        "doneAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "dateKey", "title", "type", "hours"]
+    },
+    "ExpenseEntry": {
+      "title": "ExpenseEntry",
+      "description": "Bike fuel or maintenance expense",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "dateKey": { "type": "string" },
+        "title": { "type": "string" },
+        "amount": { "type": "number" },
+        "category": { "type": "string" },
+        "comment": { "type": "string" },
+        "doneAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "dateKey", "title", "amount"]
+    },
+    "MonthlyGoals": {
+      "title": "MonthlyGoals",
+      "description": "Monthly targets for income and study",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "incomeTarget": { "type": "number" },
+        "studyHoursTarget": { "type": "number" },
+        "rideHoursTarget": { "type": "number" },
+        "updatedAt": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User profile document"
+    },
+    "/users/{userId}/activities/{activityId}": {
+      "schema": { "$ref": "#/entities/ActivityEntry" },
+      "description": "User's activity entries"
+    },
+    "/users/{userId}/expenses/{expenseId}": {
+      "schema": { "$ref": "#/entities/ExpenseEntry" },
+      "description": "User's expense entries"
+    },
+    "/users/{userId}/goals/monthly": {
+      "schema": { "$ref": "#/entities/MonthlyGoals" },
+      "description": "User's monthly goals"
+    }
+  }
+}
